@@ -1,0 +1,37 @@
+import gradio as gr
+import numpy as np
+import joblib
+
+# Load the trained model
+model = joblib.load("symptom_checker_model.pkl")
+
+# Define the 5 symptoms your model was trained on
+trained_symptoms = ["anxiety and nervousness", "shortness of breath", "dizziness", "insomnia", "chest tightness"]
+
+# Function to make predictions
+def predict_disease(selected_symptoms):
+    # Convert selected symptoms into binary vector
+    symptom_vector = [1 if symptom in selected_symptoms else 0 for symptom in trained_symptoms]
+
+    # Reshape to match model input
+    symptom_vector = np.array(symptom_vector).reshape(1, -1)
+
+    # Make prediction
+    prediction_index = model.predict(symptom_vector).item()
+
+    return f"Predicted Disease: {prediction_index}"
+
+# Create Gradio UI
+with gr.Blocks() as ui:
+    gr.Markdown("# 🏥 AI Symptom Checker")
+
+    # Multi-select dropdown for symptoms
+    symptom_input = gr.Dropdown(choices=trained_symptoms, label="Select Symptoms", multiselect=True)
+
+    submit_btn = gr.Button("🔍 Check Disease")
+    result = gr.Textbox(label="Prediction")
+
+    submit_btn.click(predict_disease, inputs=symptom_input, outputs=result)
+
+# Run the UI
+ui.launch()
