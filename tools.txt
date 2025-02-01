@@ -1,0 +1,22 @@
+🛠 Tools Used in This AI Symptom Checker
+1. Python Libraries
+gradio → For the interactive UI
+numpy → For handling numerical arrays
+joblib → For loading the trained model
+sklearn.ensemble.RandomForestClassifier → Used to train the prediction model
+pandas → For data processing
+2. Machine Learning
+RandomForestClassifier → Trained on symptom-disease dataset
+Feature Engineering → Converted symptom names into binary vectors
+3. Deployment & Hosting
+Gradio Share Link → Instant hosting (valid for a session)
+Hugging Face Spaces → Permanent public access
+Flask & Render/Vercel → Cloud hosting options
+
+
+
+OUTPUT LINK:
+
+URL: "https://42c99d706574e359c8.gradio.live"
+
+DATASET: kraggle
